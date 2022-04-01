@@ -238,4 +238,38 @@ mysql> describe employee_payroll;
 +------------+--------------+------+-----+---------+----------------+
 8 rows in set (0.00 sec)
 
+-----------------UC 9 - EXTEND - PAYS = BASIC, TAXABLE, NET, DEDUCTION, INCOME TAX------------
 
+mysql> alter table employee_payroll add BasicPay float after salary, add Deductions float after BasicPay, add TaxablePay float after Deductions, add IncomeTax float after TaxablePay, add NetPay float after IncomeTax;
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe employee_payroll;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(150) | NO   |     | NULL    |                |
+| gender     | char(1)      | YES  |     | NULL    |                |
+| phone      | int          | YES  |     | NULL    |                |
+| address    | varchar(100) | YES  |     | NULL    |                |
+| department | varchar(30)  | NO   |     | NULL    |                |
+| salary     | double       | NO   |     | NULL    |                |
+| BasicPay   | float        | YES  |     | NULL    |                |
+| Deductions | float        | YES  |     | NULL    |                |
+| TaxablePay | float        | YES  |     | NULL    |                |
+| IncomeTax  | float        | YES  |     | NULL    |                |
+| NetPay     | float        | YES  |     | NULL    |                |
+| start      | date         | NO   |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+13 rows in set (0.00 sec)
+
+mysql> select * from employee_payroll;
++----+---------+--------+-------+---------+------------+---------+----------+------------+------------+-----------+--------+------------+
+| id | name    | gender | phone | address | department | salary  | BasicPay | Deductions | TaxablePay | IncomeTax | NetPay | start      |
++----+---------+--------+-------+---------+------------+---------+----------+------------+------------+-----------+--------+------------+
+|  1 | Bill    | M      |  NULL | NULL    |            | 1000000 |     NULL |       NULL |       NULL |      NULL |   NULL | 2018-01-03 |
+|  2 | Terisa  | F      |  NULL | NULL    |            | 3000000 |     NULL |       NULL |       NULL |      NULL |   NULL | 2019-11-13 |
+|  3 | Charlie | M      |  NULL | NULL    |            | 3000000 |     NULL |       NULL |       NULL |      NULL |   NULL | 2020-05-21 |
++----+---------+--------+-------+---------+------------+---------+----------+------------+------------+-----------+--------+------------+
+3 rows in set (0.00 sec)
