@@ -207,5 +207,35 @@ mysql> SELECT gender, SUM(salary) FROM employee_payroll GROUP by gender;
 +--------+-------------+
 2 rows in set (0.00 sec)
 
+-----------------UC 8 - EXTEND - PHONE, ADDRESS & DEPARTMENT------------
+
+mysql> alter table employee_payroll add phone int(20) after gender, add address varchar(100) after phone, add department varchar(30) not null after address;
+Query OK, 0 rows affected, 1 warning (0.22 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> select * from employee_payroll;
++----+---------+--------+-------+---------+------------+---------+------------+
+| id | name    | gender | phone | address | department | salary  | start      |
++----+---------+--------+-------+---------+------------+---------+------------+
+|  1 | Bill    | M      |  NULL | NULL    |            | 1000000 | 2018-01-03 |
+|  2 | Terisa  | F      |  NULL | NULL    |            | 3000000 | 2019-11-13 |
+|  3 | Charlie | M      |  NULL | NULL    |            | 3000000 | 2020-05-21 |
++----+---------+--------+-------+---------+------------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> describe employee_payroll;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(150) | NO   |     | NULL    |                |
+| gender     | char(1)      | YES  |     | NULL    |                |
+| phone      | int          | YES  |     | NULL    |                |
+| address    | varchar(100) | YES  |     | NULL    |                |
+| department | varchar(30)  | NO   |     | NULL    |                |
+| salary     | double       | NO   |     | NULL    |                |
+| start      | date         | NO   |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+8 rows in set (0.00 sec)
 
 
